@@ -48,7 +48,7 @@ button:hover {
 }
 
 @keyframes fall {
-  to { transform: translateY(100vh); }
+  to { transform: translateY(100vh); }
 }
 
 #music-btn {
@@ -75,38 +75,6 @@ h2 {
   color: gold;
   margin-top: 10px;
   font-weight: 400;
-}
-
-/* Mobile adjustments */
-@media (max-width: 480px) {
-  body {
-    padding-top: 60px;
-  }
-
-  h1 {
-    font-size: 2em;
-  }
-
-  h2 {
-    font-size: 1.2em;
-    margin-top: 5px;
-  }
-
-  button {
-    font-size: 1em;
-    padding: 10px 20px;
-  }
-
-  .snowflake {
-    font-size: 14px;
-  }
-
-  #music-btn {
-    font-size: 0.9em;
-    padding: 8px 12px;
-    bottom: 15px;
-    right: 15px;
-  }
 }
 
 #credit {

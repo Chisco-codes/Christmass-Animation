@@ -14,22 +14,34 @@ function wish() {
   document.getElementById("message").innerText = randomWish;
 }
 
-
 // Snowfall effect
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.classList.add("snowflake");
   snowflake.textContent = "❄";
-  snowflake.style.left = Math.random() * window.innerWidth + "px";
-  snowflake.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+  // Limit snowflake horizontal position within viewport
+  const maxWidth = window.innerWidth - 20; 
+  snowflake.style.left = Math.random() * maxWidth + "px";
+
+  // Randomize size and speed
+  const size = Math.random() * 8 + 12; // 12px to 20px
+  snowflake.style.fontSize = size + "px";
+
+  const duration = Math.random() * 3 + 2; // 2s to 5s
+  snowflake.style.animationDuration = duration + "s";
+
   document.body.appendChild(snowflake);
 
-  setTimeout(() => {
-    snowflake.remove();
-  }, 5000);
+  // Remove snowflake after animation ends
+  setTimeout(() => snowflake.remove(), duration * 1000);
 }
 
-setInterval(createSnowflake, 300);
+// Adjust snowflake interval for smaller screens
+let snowInterval = 300;
+if (window.innerWidth < 480) snowInterval = 600; // slower on phones
+
+setInterval(createSnowflake, snowInterval);
 
 // Background music control
 const music = document.getElementById("bg-music");
