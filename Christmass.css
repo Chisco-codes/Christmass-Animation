@@ -48,7 +48,7 @@ button:hover {
 }
 
 @keyframes fall {
-  to { transform: translateY(100vh); }
+  to { transform: translateY(100vh); }
 }
 
 #music-btn {
