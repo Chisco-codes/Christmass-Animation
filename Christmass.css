@@ -40,6 +40,13 @@ button:hover {
   color: gold;
 }
 
+#message {
+  font-style: normal;  /* ensure random wishes are not italic */
+  line-height: 1.5;    /* better spacing for readability */
+  word-wrap: break-word;
+}
+
+
 .snowflake {
   position: absolute;
   top: -10px;
@@ -83,4 +90,16 @@ h2 {
   color: rgba(255, 215, 0, 0.8); /* Gold but subtle */
   margin-top: 40px;
   font-style: italic;
+}
+
+/* Credit and secondary text adjustments */
+h2, #credit {
+  font-style: normal; /* remove heavy italics for clarity */
+}
+
+/* Mobile-specific tweaks for clarity */
+@media (max-width: 480px) {
+  h2, #credit {
+    font-style: normal; /* ensure text is not italic on small screens */
+  }
 }
