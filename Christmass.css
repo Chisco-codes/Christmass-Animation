@@ -1,0 +1,118 @@
+body {
+  background: linear-gradient(to bottom, #001f3f, #0074D9);
+  color: white;
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+  padding-top: 100px;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 3em;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px red; }
+  to { text-shadow: 0 0 20px gold; }
+}
+
+button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.2em;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-top: 20px;
+  transition: transform 0.2s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background: green;
+}
+
+#message {
+  margin-top: 20px;
+  font-size: 1.5em;
+  color: gold;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  font-size: 20px;
+  animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(100vh); }
+}
+
+#music-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: gold;
+  color: #001f3f;
+  font-size: 1em;
+  padding: 10px 16px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+}
+
+#music-btn:hover {
+  background: red;
+  color: white;
+}
+
+h2 {
+  text-align: center;
+  color: gold;
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  body {
+    padding-top: 60px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+    margin-top: 5px;
+  }
+
+  button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+
+  .snowflake {
+    font-size: 14px;
+  }
+
+  #music-btn {
+    font-size: 0.9em;
+    padding: 8px 12px;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+#credit {
+  text-align: center;
+  font-size: 0.9em;
+  color: rgba(255, 215, 0, 0.8); /* Gold but subtle */
+  margin-top: 40px;
+  font-style: italic;
+}
