@@ -1,3 +1,10 @@
+/* Global reset for stability */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: linear-gradient(to bottom, #001f3f, #0074D9);
   color: white;
@@ -7,16 +14,31 @@ body {
   overflow: hidden;
 }
 
+/* Headings */
 h1 {
   font-size: 3em;
   animation: glow 2s infinite alternate;
 }
 
-@keyframes glow {
-  from { text-shadow: 0 0 10px red; }
-  to { text-shadow: 0 0 20px gold; }
+h2 {
+  text-align: center;
+  color: gold;
+  margin-top: 10px;
+  font-weight: 400;
+  font-style: normal;
 }
 
+/* Glow animation */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px red;
+  }
+  to {
+    text-shadow: 0 0 20px gold;
+  }
+}
+
+/* Buttons */
 button {
   background: red;
   color: white;
@@ -26,7 +48,7 @@ button {
   cursor: pointer;
   border-radius: 8px;
   margin-top: 20px;
-  transition: transform 0.2s;
+  transition: transform 0.2s, background 0.2s;
 }
 
 button:hover {
@@ -34,19 +56,18 @@ button:hover {
   background: green;
 }
 
+/* Wish message */
 #message {
   margin-top: 20px;
   font-size: 1.5em;
   color: gold;
-}
-
-#message {
-  font-style: normal;  /* ensure random wishes are not italic */
-  line-height: 1.5;    /* better spacing for readability */
+  font-style: normal;
+  line-height: 1.5;
   word-wrap: break-word;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
-
+/* Snowflakes */
 .snowflake {
   position: absolute;
   top: -10px;
@@ -55,9 +76,12 @@ button:hover {
 }
 
 @keyframes fall {
-  to { transform: translateY(100vh); }
+  to {
+    transform: translateY(100vh);
+  }
 }
 
+/* Music button */
 #music-btn {
   position: fixed;
   bottom: 20px;
@@ -77,29 +101,104 @@ button:hover {
   color: white;
 }
 
-h2 {
-  text-align: center;
-  color: gold;
-  margin-top: 10px;
-  font-weight: 400;
-}
-
+/* Credit */
 #credit {
   text-align: center;
   font-size: 0.9em;
-  color: rgba(255, 215, 0, 0.8); /* Gold but subtle */
+  color: rgba(255, 215, 0, 0.8);
   margin-top: 40px;
-  font-style: italic;
+  font-style: normal;
 }
 
-/* Credit and secondary text adjustments */
-h2, #credit {
-  font-style: normal; /* remove heavy italics for clarity */
+/* Countdown title */
+#countdown-title {
+  margin-top: 30px;
+  color: gold;
+  font-weight: 500;
+  font-style: normal;
 }
 
-/* Mobile-specific tweaks for clarity */
+/* Countdown container */
+#countdown {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+  font-size: 1.4em;
+  color: gold;
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Countdown boxes */
+#countdown span {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 1.1em;
+  color: gold;
+  min-width: 90px;
+}
+
+#countdown strong {
+  display: block;
+  font-size: 1.8em;
+  color: white;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile adjustments */
 @media (max-width: 480px) {
-  h2, #credit {
-    font-style: normal; /* ensure text is not italic on small screens */
+  body {
+    padding-top: 60px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  button {
+    font-size: 1em;
+    padding: 10px 20px;
+  }
+
+  .snowflake {
+    font-size: 14px;
+  }
+
+  #music-btn {
+    font-size: 0.9em;
+    padding: 8px 12px;
+    bottom: 15px;
+    right: 15px;
+  }
+
+  #countdown {
+    font-size: 1.2em;
+  }
+
+  #countdown span {
+    font-size: 1em;
+    min-width: 75px;
+    padding: 10px;
+  }
+
+  #countdown strong {
+    font-size: 1.5em;
   }
 }

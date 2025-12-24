@@ -1,4 +1,4 @@
-// Random wishes (Christmas + New Year)
+// 🎄 Random wishes
 const wishes = [
   "🎅 Merry Christmas and Happy Holidays!",
   "🎄 Wishing you joy and peace this Christmas!",
@@ -9,49 +9,64 @@ const wishes = [
   "🌟 May the New Year bring you peace, health, and prosperity!"
 ];
 
+const clickSound = document.getElementById("click-sound");
+
 function wish() {
+  const message = document.getElementById("message");
   const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
-  document.getElementById("message").innerText = randomWish;
+  message.innerText = randomWish;
+
+  if (clickSound) {
+    clickSound.currentTime = 0;
+    clickSound.play().catch(() => {});
+  }
 }
 
-// Snowfall effect
+// 🎆 Countdown to New Year
+function updateCountdown() {
+  const now = new Date();
+  const newYear = new Date(now.getFullYear() + 1, 0, 1);
+  const diff = newYear - now;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// ❄ Snowfall effect (stable)
 function createSnowflake() {
   const snowflake = document.createElement("div");
-  snowflake.classList.add("snowflake");
+  snowflake.className = "snowflake";
   snowflake.textContent = "❄";
 
-  // Limit snowflake horizontal position within viewport
-  const maxWidth = window.innerWidth - 20; 
-  snowflake.style.left = Math.random() * maxWidth + "px";
-
-  // Randomize size and speed
-  const size = Math.random() * 8 + 12; // 12px to 20px
-  snowflake.style.fontSize = size + "px";
-
-  const duration = Math.random() * 3 + 2; // 2s to 5s
-  snowflake.style.animationDuration = duration + "s";
+  snowflake.style.left = Math.random() * (window.innerWidth - 20) + "px";
+  snowflake.style.fontSize = Math.random() * 10 + 12 + "px";
+  snowflake.style.animationDuration = Math.random() * 3 + 3 + "s";
 
   document.body.appendChild(snowflake);
 
-  // Remove snowflake after animation ends
-  setTimeout(() => snowflake.remove(), duration * 1000);
+  setTimeout(() => snowflake.remove(), 6000);
 }
 
-// Adjust snowflake interval for smaller screens
-let snowInterval = 300;
-if (window.innerWidth < 480) snowInterval = 600; // slower on phones
+setInterval(createSnowflake, window.innerWidth < 480 ? 700 : 400);
 
-setInterval(createSnowflake, snowInterval);
-
-// Background music control
+// 🎵 Background music control
 const music = document.getElementById("bg-music");
 const musicBtn = document.getElementById("music-btn");
-
 let isPlaying = false;
 
 musicBtn.addEventListener("click", () => {
   if (!isPlaying) {
-    music.play();
+    music.play().catch(() => {});
     musicBtn.textContent = "🔇 Pause Music";
   } else {
     music.pause();
