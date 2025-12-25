@@ -75,6 +75,28 @@ const music = document.getElementById("bg-music");
 const musicBtn = document.getElementById("music-btn");
 let isPlaying = false;
 
+/* ✅ ADDED: mobile-safe autoplay after first user interaction */
+let musicStartedOnce = false;
+
+function startMusicOnce() {
+  if (musicStartedOnce) return;
+
+  music.play().then(() => {
+    isPlaying = true;
+    musicBtn.textContent = "🔇 Pause Music";
+    musicStartedOnce = true;
+  }).catch(() => {});
+
+  document.removeEventListener("click", startMusicOnce);
+  document.removeEventListener("touchstart", startMusicOnce);
+}
+
+// Listen for first real user interaction (iOS / Android safe)
+document.addEventListener("click", startMusicOnce);
+document.addEventListener("touchstart", startMusicOnce);
+/* ✅ END ADD */
+
+/* Existing music button — untouched */
 musicBtn.addEventListener("click", () => {
   if (!isPlaying) {
     music.play().catch(() => {});
@@ -90,11 +112,11 @@ musicBtn.addEventListener("click", () => {
 const popup = document.getElementById("christmas-popup");
 const openBtn = document.getElementById("open-popup-btn");
 const closeBtn = document.getElementById("close-popup-btn");
-const popupActionBtn = document.getElementById("popup-action-btn"); // NEW
+const popupActionBtn = document.getElementById("popup-action-btn");
 
 function openPopup() {
   if (!popup) return;
-  popup.style.display = "flex"; // keep flex for CSS overlay centering
+  popup.style.display = "flex";
 
   // Confetti bursts
   confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
@@ -112,7 +134,7 @@ function closePopup() {
 // Attach button event listeners
 if (openBtn) openBtn.addEventListener("click", openPopup);
 if (closeBtn) closeBtn.addEventListener("click", closePopup);
-if (popupActionBtn) popupActionBtn.addEventListener("click", closePopup); // NEW
+if (popupActionBtn) popupActionBtn.addEventListener("click", closePopup);
 
 // Auto-show on Christmas if not seen
 (function showChristmasPopup() {
