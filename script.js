@@ -146,4 +146,49 @@ if (popupActionBtn) popupActionBtn.addEventListener("click", closePopup);
     openPopup();
   }
 })();
-////////////////////////////////////////////
+
+// 🎁 Lucky Box – New Year Prediction (MULTI-CLICK + FLASH)
+
+// New Year fortune messages
+const newYearFortunes = [
+  "🌟 This year will open doors to exciting new opportunities!",
+  "💼 Career growth and success are coming your way!",
+  "❤️ Love, connection, and deeper relationships await you!",
+  "✈️ Travel and new adventures will shape your year!",
+  "🧠 A year of clarity, wisdom, and confident decisions!",
+  "🏡 Peace, stability, and happiness will surround you!",
+  "🔥 Big changes are ahead — embrace them fearlessly!"
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+  const boxes = document.querySelectorAll(".lucky-box");
+  const resultText = document.getElementById("lucky-result");
+
+  // Exit safely if section is not on page
+  if (!boxes.length || !resultText) return;
+
+  boxes.forEach(box => {
+    box.addEventListener("click", () => {
+      // Add visual flash
+      box.classList.add("popup-flash");
+      setTimeout(() => box.classList.remove("popup-flash"), 350);
+
+      // Add temporary opened effect
+      box.classList.add("opened");
+      setTimeout(() => box.classList.remove("opened"), 700);
+
+      // Show random fortune
+      const fortune = newYearFortunes[Math.floor(Math.random() * newYearFortunes.length)];
+      resultText.textContent = fortune;
+
+      // Optional confetti
+      if (typeof confetti === "function") {
+        confetti({
+          particleCount: 60,
+          spread: 60,
+          origin: { y: 0.7 }
+        });
+      }
+    });
+  });
+});
