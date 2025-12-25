@@ -138,8 +138,7 @@ if (popupActionBtn) popupActionBtn.addEventListener("click", closePopup);
     openPopup();
   }
 })();
-
-// 🎁 Lucky Box – New Year Prediction (POPUP STYLE + FLASH)
+// 🎁 Lucky Box – New Year Prediction (POPUP STYLE + FLASH + SURPRISE)
 const newYearFortunes = [
   "🌟 This year will open doors to exciting new opportunities!",
   "💼 Career growth and success are coming your way!",
@@ -147,7 +146,20 @@ const newYearFortunes = [
   "✈️ Travel and new adventures will shape your year!",
   "🧠 A year of clarity, wisdom, and confident decisions!",
   "🏡 Peace, stability, and happiness will surround you!",
-  "🔥 Big changes are ahead — embrace them fearlessly!"
+  "🔥 Big changes are ahead — embrace them fearlessly!",
+  "💪 You’ll need to work harder this year to reach your goals!",
+  "🚭 Time to leave old habits behind — like smoking or procrastination!",
+  "💰 Your savings and collections will grow faster than ever!",
+  "🌠 You are a destined child — special moments are coming!",
+  "🎨 A hidden talent will surprise everyone!",
+  "💌 Expect unexpected messages from someone inspiring!",
+  "⚡ A twist of fate will challenge you but lead to a big win!",
+  "🍀 Luck is on your side if you take that bold step!",
+  "🛤️ A journey or relocation will change your life positively!",
+  "📚 Knowledge gained now will pay off later!",
+  "🎭 A surprise encounter will bring joy and laughter!",
+  "🕰️ Reflection on past habits brings clarity — a new chapter begins!",
+  "🎯 Focus on what matters most — you’ll hit your target sooner!"
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -155,6 +167,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultText = document.getElementById("lucky-result");
 
   if (!boxes.length || !resultText) return;
+
+  // ✅ Reset sessionStorage so boxes are clickable after refresh
+  sessionStorage.removeItem("luckyBoxPicked");
+
+  // Reset clicked flags
+  boxes.forEach(box => box.dataset.clicked = "");
 
   // Create Lucky Popup
   const luckyPopupOverlay = document.createElement("div");
@@ -178,15 +196,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let clickedCount = 0;
 
-  if (sessionStorage.getItem("luckyBoxPicked")) {
-    resultText.textContent = "🎆 You’ve already picked your fortunes! Refresh to try again.";
-    boxes.forEach(b => b.style.pointerEvents = "none");
-    return;
-  }
-
   boxes.forEach(box => {
     box.addEventListener("click", () => {
-      if (box.dataset.clicked) return;
+      if (box.dataset.clicked === "true") return;
       box.dataset.clicked = "true";
 
       box.classList.add("popup-flash");
@@ -209,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
 
-      // ✅ Keep popup visible for 8 seconds (instead of 4)
+      // Keep popup visible for 8 seconds
       setTimeout(closeLuckyPopup, 8000);
 
       clickedCount++;
@@ -222,3 +234,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
