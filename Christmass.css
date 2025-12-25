@@ -279,3 +279,54 @@ button:hover {
     opacity: 1;
   }
 }
+
+/* 📱 Mobile readability improvements */
+@media (max-width: 480px) {
+
+  body {
+    padding-top: 60px;
+  }
+
+  h1 {
+    font-size: 2.1em;
+    line-height: 1.3;
+    text-shadow: 0 0 6px red; /* softer glow on mobile */
+  }
+
+  h2 {
+    font-size: 1.1em;
+    line-height: 1.4;
+    margin: 12px 10px;
+  }
+
+  button {
+    font-size: 1.1em;
+    padding: 14px 20px;
+  }
+
+  #message {
+    font-size: 1.25em;
+    line-height: 1.6;
+    padding: 0 15px;
+  }
+
+  #countdown span {
+    font-size: 1em;
+    padding: 12px;
+  }
+
+  #countdown strong {
+    font-size: 1.6em;
+  }
+
+  #music-btn {
+    font-size: 0.9em;
+    padding: 8px 14px;
+  }
+
+  #credit {
+    font-size: 0.85em;
+    margin-top: 30px;
+  }
+}
+
