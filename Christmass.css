@@ -180,6 +180,31 @@ button:hover {
   animation: fadeIn 0.6s ease-in-out;
 }
 
+/* Lucky Popup Zoom + Glow Animation */
+@keyframes luckyPopupAppear {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+    box-shadow: 0 0 0px gold;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+    box-shadow: 0 0 30px gold;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 15px gold;
+  }
+}
+
+.lucky-popup-box {
+  animation: luckyPopupAppear 0.8s ease forwards;
+  transition: box-shadow 0.5s ease;
+}
+
+
 .popup-box {
   background: linear-gradient(to bottom, #001f3f, #0074D9);
   color: white;
@@ -320,3 +345,125 @@ button:hover {
 .lucky-box.flash {
   animation: popupFlash 0.35s ease;
 }
+
+/* 🎇 Lucky message splash animation */
+@keyframes splashUp {
+  0% { transform: translateY(10px) scale(0.9); opacity: 0.7; }
+  50% { transform: translateY(-20px) scale(1.1); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+#lucky-result.popup-flash {
+  animation: splashUp 0.6s ease forwards;
+  color: gold;
+  font-weight: bold;
+  text-shadow: 0 0 10px white;
+}
+
+/* Floating splash message for each box click */
+.splash-fortune {
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  font-size: 1.4em;
+  font-weight: bold;
+  color: gold;
+  text-shadow: 0 0 12px white;
+  pointer-events: none;
+  z-index: 9999;
+  animation: splashUp 1.8s ease-out forwards;
+}
+
+/* 🎇 Lucky message splash animation */
+.splash-fortune {
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  font-size: 1.4em;
+  font-weight: bold;
+  color: gold;
+  text-shadow: 0 0 12px white;
+  pointer-events: none;
+  z-index: 9999;
+  animation: splashUp 2.5s ease-out forwards; /* longer duration */
+}
+
+@keyframes splashUp {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(0.9);
+    opacity: 0;
+  }
+  20% {
+    transform: translateX(-50%) translateY(-20px) scale(1.05);
+    opacity: 1;
+  }
+  60% {
+    transform: translateX(-50%) translateY(-20px) scale(1);
+    opacity: 1; /* hold here so user can read */
+  }
+  100% {
+    transform: translateX(-50%) translateY(-80px) scale(1);
+    opacity: 0; /* fade out after hold */
+  }
+}
+
+/* Mobile adjustment */
+@media (max-width: 480px) {
+  .splash-fortune {
+    font-size: 1.1em;
+    bottom: 80px;
+  }
+}
+
+/* 🎁 Lucky Box Popup */
+.lucky-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.lucky-popup-box {
+  background: linear-gradient(to bottom, #001f3f, #0074D9);
+  color: gold;
+  padding: 25px 20px;
+  border-radius: 18px;
+  max-width: 320px;
+  width: 85%;
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-shadow: 0 0 10px white;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+  animation: popupFlash 0.5s ease;
+  position: relative;
+}
+
+.lucky-popup-close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.3em;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Popup flash animation */
+@keyframes popupFlash {
+  0% { transform: scale(0.85); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+

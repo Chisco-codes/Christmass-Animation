@@ -74,8 +74,6 @@ setInterval(createSnowflake, window.innerWidth < 480 ? 700 : 400);
 const music = document.getElementById("bg-music");
 const musicBtn = document.getElementById("music-btn");
 let isPlaying = false;
-
-/* ✅ ADDED: mobile-safe autoplay after first user interaction */
 let musicStartedOnce = false;
 
 function startMusicOnce() {
@@ -91,12 +89,9 @@ function startMusicOnce() {
   document.removeEventListener("touchstart", startMusicOnce);
 }
 
-// Listen for first real user interaction (iOS / Android safe)
 document.addEventListener("click", startMusicOnce);
 document.addEventListener("touchstart", startMusicOnce);
-/* ✅ END ADD */
 
-/* Existing music button — untouched */
 musicBtn.addEventListener("click", () => {
   if (!isPlaying) {
     music.play().catch(() => {});
@@ -118,7 +113,6 @@ function openPopup() {
   if (!popup) return;
   popup.style.display = "flex";
 
-  // Confetti bursts
   confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
   setTimeout(() => {
     confetti({ particleCount: 50, spread: 100, origin: { y: 0.6 } });
@@ -131,12 +125,10 @@ function closePopup() {
   sessionStorage.setItem("christmasPopupSeen", "true");
 }
 
-// Attach button event listeners
 if (openBtn) openBtn.addEventListener("click", openPopup);
 if (closeBtn) closeBtn.addEventListener("click", closePopup);
 if (popupActionBtn) popupActionBtn.addEventListener("click", closePopup);
 
-// Auto-show on Christmas if not seen
 (function showChristmasPopup() {
   const today = new Date();
   const isChristmas = today.getMonth() === 11 && today.getDate() === 25;
@@ -147,9 +139,7 @@ if (popupActionBtn) popupActionBtn.addEventListener("click", closePopup);
   }
 })();
 
-// 🎁 Lucky Box – New Year Prediction (MULTI-CLICK + FLASH)
-
-// New Year fortune messages
+// 🎁 Lucky Box – New Year Prediction (POPUP STYLE + FLASH)
 const newYearFortunes = [
   "🌟 This year will open doors to exciting new opportunities!",
   "💼 Career growth and success are coming your way!",
@@ -164,30 +154,70 @@ document.addEventListener("DOMContentLoaded", () => {
   const boxes = document.querySelectorAll(".lucky-box");
   const resultText = document.getElementById("lucky-result");
 
-  // Exit safely if section is not on page
   if (!boxes.length || !resultText) return;
+
+  // Create Lucky Popup
+  const luckyPopupOverlay = document.createElement("div");
+  luckyPopupOverlay.className = "lucky-popup-overlay";
+
+  const luckyPopupBox = document.createElement("div");
+  luckyPopupBox.className = "lucky-popup-box";
+
+  const closeBtn = document.createElement("button");
+  closeBtn.className = "lucky-popup-close";
+  closeBtn.innerHTML = "&times;";
+
+  luckyPopupBox.appendChild(closeBtn);
+  luckyPopupOverlay.appendChild(luckyPopupBox);
+  document.body.appendChild(luckyPopupOverlay);
+
+  function closeLuckyPopup() {
+    luckyPopupOverlay.style.display = "none";
+  }
+  closeBtn.addEventListener("click", closeLuckyPopup);
+
+  let clickedCount = 0;
+
+  if (sessionStorage.getItem("luckyBoxPicked")) {
+    resultText.textContent = "🎆 You’ve already picked your fortunes! Refresh to try again.";
+    boxes.forEach(b => b.style.pointerEvents = "none");
+    return;
+  }
 
   boxes.forEach(box => {
     box.addEventListener("click", () => {
-      // Add visual flash
+      if (box.dataset.clicked) return;
+      box.dataset.clicked = "true";
+
       box.classList.add("popup-flash");
       setTimeout(() => box.classList.remove("popup-flash"), 350);
 
-      // Add temporary opened effect
       box.classList.add("opened");
       setTimeout(() => box.classList.remove("opened"), 700);
 
-      // Show random fortune
       const fortune = newYearFortunes[Math.floor(Math.random() * newYearFortunes.length)];
-      resultText.textContent = fortune;
 
-      // Optional confetti
+      luckyPopupBox.innerHTML = fortune;
+      luckyPopupBox.appendChild(closeBtn);
+      luckyPopupOverlay.style.display = "flex";
+
       if (typeof confetti === "function") {
         confetti({
-          particleCount: 60,
-          spread: 60,
+          particleCount: 80,
+          spread: 70,
           origin: { y: 0.7 }
         });
+      }
+
+      // ✅ Keep popup visible for 8 seconds (instead of 4)
+      setTimeout(closeLuckyPopup, 8000);
+
+      clickedCount++;
+
+      if (clickedCount >= boxes.length) {
+        sessionStorage.setItem("luckyBoxPicked", "true");
+        resultText.textContent = "🎆 You’ve picked all your fortunes! Refresh to try again.";
+        boxes.forEach(b => b.style.pointerEvents = "none");
       }
     });
   });
