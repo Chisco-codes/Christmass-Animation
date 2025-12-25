@@ -10,6 +10,11 @@
 
   <h1>🎄 Merry Christmas Everyone! 🎄</h1>
 
+  <!-- 🎄 Christmas Day Highlight -->
+  <div id="christmas-today" style="display: none; font-size: 1.2em; margin: 15px 0;">
+    🎄✨ Today is Christmas! May your day be filled with love, joy & warmth ✨🎄
+  </div>
+
   <h2>🎇 Wishing Everyone a Merry Christmas & a Prosperous New Year! 🎇</h2>
 
   <button onclick="wish()">🎁 Tap for a Christmas Wish!</button>
@@ -54,7 +59,22 @@
     </div>
   </div>
 
+  <!-- 🎄 Christmas Popup -->
+<div id="christmas-popup" class="popup-overlay">
+  <div class="popup-box">
+    <button class="close-btn" onclick="closePopup()">✖</button>
+    <h2>🎄 Merry Christmas! 🎄</h2>
+    <p>
+      Today is Christmas ✨<br />
+      May your day be filled with love, joy, laughter, and warmth.
+    </p>
+    <button class="popup-action" onclick="closePopup()">🎁 Enjoy the Wishes</button>
+  </div>
+</div>
+
+
   <p id="credit">🎨 Created by Chisco (Desmond)</p>
+
 
   <!-- JavaScript -->
   <script src="script.js"></script>

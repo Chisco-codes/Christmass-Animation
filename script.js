@@ -22,6 +22,18 @@ function wish() {
   }
 }
 
+// 🎄 Show message ONLY on Christmas Day
+(function checkChristmasDay() {
+  const today = new Date();
+  const isChristmas =
+    today.getMonth() === 11 && today.getDate() === 25; // December is month 11
+
+  const christmasBanner = document.getElementById("christmas-today");
+  if (christmasBanner && isChristmas) {
+    christmasBanner.style.display = "block";
+  }
+})();
+
 // 🎆 Countdown to New Year
 function updateCountdown() {
   const now = new Date();
@@ -74,3 +86,23 @@ musicBtn.addEventListener("click", () => {
   }
   isPlaying = !isPlaying;
 });
+
+// 🎄 Christmas Popup Logic
+function closePopup() {
+  document.getElementById("christmas-popup").style.display = "none";
+  sessionStorage.setItem("christmasPopupSeen", "true");
+}
+
+(function showChristmasPopup() {
+  const today = new Date();
+  const isChristmas =
+    today.getMonth() === 11 && today.getDate() === 25;
+
+  const popupSeen = sessionStorage.getItem("christmasPopupSeen");
+  const popup = document.getElementById("christmas-popup");
+
+  if (popup && isChristmas && !popupSeen) {
+    popup.style.display = "flex";
+  }
+})();
+
