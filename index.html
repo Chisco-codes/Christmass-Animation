@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Merry Christmas</title>
-  <link rel="stylesheet" href="Christmass.css">
+  <link rel="stylesheet" href="Christmass.css" />
 </head>
 <body>
 
@@ -18,7 +18,6 @@
   <h2>🎇 Wishing Everyone a Merry Christmas & a Prosperous New Year! 🎇</h2>
 
   <button onclick="wish()">🎁 Tap for a Christmas Wish!</button>
-
   <p id="message"></p>
 
   <!-- Background Music -->
@@ -28,18 +27,14 @@
 
   <!-- Click Sound -->
   <audio id="click-sound">
-    <source src="click.mp3" type="audio/mpeg">
+    <source src="christmas-music.mp3.mp3" type="audio/mpeg">
   </audio>
 
   <button id="music-btn">🔊 Play Music</button>
-
-  <p style="font-size: 0.9em; opacity: 0.8;">
-    🔊 Optional music available
-  </p>
+  <p style="font-size: 0.9em; opacity: 0.8;">🔊 Optional music available</p>
 
   <!-- Countdown Section -->
   <h2 id="countdown-title">🎉 Countdown to New Year 🎉</h2>
-
   <div id="countdown">
     <div class="time-box">
       <strong id="days">00</strong>
@@ -60,23 +55,30 @@
   </div>
 
   <!-- 🎄 Christmas Popup -->
-<div id="christmas-popup" class="popup-overlay">
-  <div class="popup-box">
-    <button class="close-btn" onclick="closePopup()">✖</button>
-    <h2>🎄 Merry Christmas! 🎄</h2>
-    <p>
-      Today is Christmas ✨<br />
-      May your day be filled with love, joy, laughter, and warmth.
-    </p>
-    <button class="popup-action" onclick="closePopup()">🎁 Enjoy the Wishes</button>
+  <div id="christmas-popup" class="popup-overlay">
+    <div class="popup-box">
+      <button class="close-btn" id="close-popup-btn">✖</button>
+      <h2>🎄 Merry Christmas! 🎄</h2>
+      <p>
+        Today is Christmas ✨<br />
+        May your day be filled with love, joy, laughter, and warmth.
+      </p>
+      <button class="popup-action" id="popup-action-btn">🎁 Enjoy the Wishes</button>
+    </div>
   </div>
-</div>
 
+  <!-- Trigger Popup Button -->
+  <button id="open-popup-btn" style="padding:0.5rem 1rem; border:none; background:#28a745; color:white; border-radius:5px; cursor:pointer;">
+    Open Christmas Popup
+  </button>
 
   <p id="credit">🎨 Created by Chisco (Desmond)</p>
 
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- JavaScript -->
+  <!-- Your separate JS file -->
   <script src="script.js"></script>
+
 </body>
 </html>

@@ -25,8 +25,7 @@ function wish() {
 // 🎄 Show message ONLY on Christmas Day
 (function checkChristmasDay() {
   const today = new Date();
-  const isChristmas =
-    today.getMonth() === 11 && today.getDate() === 25; // December is month 11
+  const isChristmas = today.getMonth() === 11 && today.getDate() === 25;
 
   const christmasBanner = document.getElementById("christmas-today");
   if (christmasBanner && isChristmas) {
@@ -88,21 +87,40 @@ musicBtn.addEventListener("click", () => {
 });
 
 // 🎄 Christmas Popup Logic
+const popup = document.getElementById("christmas-popup");
+const openBtn = document.getElementById("open-popup-btn");
+const closeBtn = document.getElementById("close-popup-btn");
+const popupActionBtn = document.getElementById("popup-action-btn"); // NEW
+
+function openPopup() {
+  if (!popup) return;
+  popup.style.display = "flex"; // keep flex for CSS overlay centering
+
+  // Confetti bursts
+  confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+  setTimeout(() => {
+    confetti({ particleCount: 50, spread: 100, origin: { y: 0.6 } });
+  }, 400);
+}
+
 function closePopup() {
-  document.getElementById("christmas-popup").style.display = "none";
+  if (!popup) return;
+  popup.style.display = "none";
   sessionStorage.setItem("christmasPopupSeen", "true");
 }
 
+// Attach button event listeners
+if (openBtn) openBtn.addEventListener("click", openPopup);
+if (closeBtn) closeBtn.addEventListener("click", closePopup);
+if (popupActionBtn) popupActionBtn.addEventListener("click", closePopup); // NEW
+
+// Auto-show on Christmas if not seen
 (function showChristmasPopup() {
   const today = new Date();
-  const isChristmas =
-    today.getMonth() === 11 && today.getDate() === 25;
-
+  const isChristmas = today.getMonth() === 11 && today.getDate() === 25;
   const popupSeen = sessionStorage.getItem("christmasPopupSeen");
-  const popup = document.getElementById("christmas-popup");
 
   if (popup && isChristmas && !popupSeen) {
-    popup.style.display = "flex";
+    openPopup();
   }
 })();
-
