@@ -1,4 +1,4 @@
-// 🎄 Random wishes
+// 🎁 Random Boxing Day wishes
 const wishes = [
   "🎁 Happy Boxing Day! Enjoy the deals and good vibes!",
   "🎉 Wishing you a joyful and relaxing Boxing Day!",
@@ -148,7 +148,7 @@ if (popupActionBtn) popupActionBtn.addEventListener("click", closePopup);
   }
 })();
 
-// 🎁 Lucky Box – New Year Prediction (UNCHANGED)
+// 🎁 Lucky Box – New Year Prediction
 const newYearFortunes = [
   "🌟 This year will open doors to exciting new opportunities!",
   "💼 Career growth and success are coming your way!",
@@ -178,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!boxes.length || !resultText) return;
 
+  // ✅ Reset sessionStorage so boxes are clickable after refresh
   sessionStorage.removeItem("luckyBoxPicked");
   boxes.forEach(box => box.dataset.clicked = "");
 
