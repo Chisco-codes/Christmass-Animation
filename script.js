@@ -1,11 +1,10 @@
 // 🎄 Random wishes
 const wishes = [
-  "🎅 Merry Christmas and Happy Holidays!",
-  "🎄 Wishing you joy and peace this Christmas!",
-  "✨ May your days be merry and bright!",
-  "❄ Sending love and warmth this season!",
+  "🎁 Happy Boxing Day! Enjoy the deals and good vibes!",
+  "🎉 Wishing you a joyful and relaxing Boxing Day!",
+  "✨ May your Boxing Day be full of surprises!",
+  "🥂 Cheers to rest, fun, and happiness this Boxing Day!",
   "🎆 Wishing you a Prosperous and Joyful New Year!",
-  "🥂 Cheers to a New Year filled with success and happiness!",
   "🌟 May the New Year bring you peace, health, and prosperity!"
 ];
 
@@ -22,14 +21,15 @@ function wish() {
   }
 }
 
-// 🎄 Show message ONLY on Christmas Day
-(function checkChristmasDay() {
+// 🎁 Boxing Day banner (Dec 26 ONLY)
+(function checkBoxingDayBanner() {
   const today = new Date();
-  const isChristmas = today.getMonth() === 11 && today.getDate() === 25;
+  const isBoxingDay = today.getMonth() === 11 && today.getDate() === 26;
 
-  const christmasBanner = document.getElementById("christmas-today");
-  if (christmasBanner && isChristmas) {
-    christmasBanner.style.display = "block";
+  const banner = document.getElementById("christmas-today");
+  if (banner && isBoxingDay) {
+    banner.textContent = "🎁 Happy Boxing Day! Enjoy the surprises 🎉";
+    banner.style.display = "block";
   }
 })();
 
@@ -103,7 +103,7 @@ musicBtn.addEventListener("click", () => {
   isPlaying = !isPlaying;
 });
 
-// 🎄 Christmas Popup Logic
+// 🎁 Boxing Day Popup Logic
 const popup = document.getElementById("christmas-popup");
 const openBtn = document.getElementById("open-popup-btn");
 const closeBtn = document.getElementById("close-popup-btn");
@@ -113,32 +113,42 @@ function openPopup() {
   if (!popup) return;
   popup.style.display = "flex";
 
-  confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-  setTimeout(() => {
-    confetti({ particleCount: 50, spread: 100, origin: { y: 0.6 } });
-  }, 400);
+  if (typeof confetti === "function") {
+    confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 } });
+  }
 }
 
 function closePopup() {
   if (!popup) return;
   popup.style.display = "none";
-  sessionStorage.setItem("christmasPopupSeen", "true");
+  sessionStorage.setItem("boxingDayPopupSeen", "true");
 }
 
 if (openBtn) openBtn.addEventListener("click", openPopup);
 if (closeBtn) closeBtn.addEventListener("click", closePopup);
 if (popupActionBtn) popupActionBtn.addEventListener("click", closePopup);
 
-(function showChristmasPopup() {
+// 🎁 Show popup ONLY on Boxing Day (Dec 26)
+(function showBoxingDayPopup() {
   const today = new Date();
-  const isChristmas = today.getMonth() === 11 && today.getDate() === 25;
-  const popupSeen = sessionStorage.getItem("christmasPopupSeen");
+  const isBoxingDay = today.getMonth() === 11 && today.getDate() === 26;
+  const popupSeen = sessionStorage.getItem("boxingDayPopupSeen");
 
-  if (popup && isChristmas && !popupSeen) {
+  if (popup && isBoxingDay && !popupSeen) {
+    const title = popup.querySelector("h2");
+    const text = popup.querySelector("p");
+
+    if (title) title.textContent = "🎁 Happy Boxing Day!";
+    if (text) {
+      text.innerHTML =
+        "Wishing you amazing deals, warm moments, and joyful surprises ✨<br>Enjoy your Boxing Day!";
+    }
+
     openPopup();
   }
 })();
-// 🎁 Lucky Box – New Year Prediction (POPUP STYLE + FLASH + SURPRISE)
+
+// 🎁 Lucky Box – New Year Prediction (UNCHANGED)
 const newYearFortunes = [
   "🌟 This year will open doors to exciting new opportunities!",
   "💼 Career growth and success are coming your way!",
@@ -168,13 +178,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!boxes.length || !resultText) return;
 
-  // ✅ Reset sessionStorage so boxes are clickable after refresh
   sessionStorage.removeItem("luckyBoxPicked");
-
-  // Reset clicked flags
   boxes.forEach(box => box.dataset.clicked = "");
 
-  // Create Lucky Popup
   const luckyPopupOverlay = document.createElement("div");
   luckyPopupOverlay.className = "lucky-popup-overlay";
 
@@ -207,31 +213,27 @@ document.addEventListener("DOMContentLoaded", () => {
       box.classList.add("opened");
       setTimeout(() => box.classList.remove("opened"), 700);
 
-      const fortune = newYearFortunes[Math.floor(Math.random() * newYearFortunes.length)];
+      const fortune =
+        newYearFortunes[Math.floor(Math.random() * newYearFortunes.length)];
 
       luckyPopupBox.innerHTML = fortune;
       luckyPopupBox.appendChild(closeBtn);
       luckyPopupOverlay.style.display = "flex";
 
       if (typeof confetti === "function") {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.7 }
-        });
+        confetti({ particleCount: 80, spread: 70, origin: { y: 0.7 } });
       }
 
-      // Keep popup visible for 8 seconds
       setTimeout(closeLuckyPopup, 8000);
 
       clickedCount++;
 
       if (clickedCount >= boxes.length) {
         sessionStorage.setItem("luckyBoxPicked", "true");
-        resultText.textContent = "🎆 You’ve picked all your fortunes! Refresh to try again.";
-        boxes.forEach(b => b.style.pointerEvents = "none");
+        resultText.textContent =
+          "🎆 You’ve picked all your fortunes! Refresh to try again.";
+        boxes.forEach(b => (b.style.pointerEvents = "none"));
       }
     });
   });
 });
-
