@@ -141,7 +141,7 @@ if (popupActionBtn) popupActionBtn.addEventListener("click", closePopup);
     if (title) title.textContent = "🎁 Happy Boxing Day!";
     if (text) {
       text.innerHTML =
-        "Wishing you amazing deals, warm moments, and joyful surprises ✨<br>Enjoy your Boxing Day!";
+        "Wishing you amazing deals, warm moments, and joyful surprises✨<br>Enjoy your Boxing Day!";
     }
 
     openPopup();
