@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Merry Christmas</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Festive Wishes</title>
   <link rel="stylesheet" href="Christmass.css" />
 </head>
 <body>
 
   <h1>🎄 Merry Christmas Everyone! 🎄</h1>
 
-  <!-- 🎄 Christmas Day Highlight -->
+  <!-- 🎄 Christmas Day Highlight (JS controls visibility) -->
   <div id="christmas-today" style="display: none; font-size: 1.2em; margin: 15px 0;">
     🎄✨ Today is Christmas! May your day be filled with love, joy & warmth ✨🎄
   </div>
 
   <h2>🎇 Wishing Everyone a Merry Christmas & a Prosperous New Year! 🎇</h2>
 
-  <button onclick="wish()">🎁 Tap for a Boxing Day Surprise!</button>
+  <!-- Boxing / Christmas / New Year message button -->
+  <button onclick="wish()">🎁 Tap for a Surprise!</button>
   <p id="message"></p>
 
-  <!-- Background Music -->
+  <!-- 🎵 Background Music -->
   <audio id="bg-music" loop>
-    <source src="City-boy.mp3.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- Click Sound -->
-  <audio id="click-sound">
-    <source src="" type="audio/mpeg">
+    <source src="City-boy.mp3.mp3" type="audio/mpeg" />
   </audio>
 
   <button id="music-btn">🔊 Play Music</button>
   <p style="font-size: 0.9em; opacity: 0.8;">🔊 Optional music available</p>
 
-  <!-- Countdown Section -->
+  <!-- 🎆 Countdown Section -->
   <h2 id="countdown-title">🎉 Countdown to New Year 🎉</h2>
   <div id="countdown">
     <div class="time-box">
@@ -54,7 +50,7 @@
     </div>
   </div>
 
-    <!-- 🎁 Lucky Box – New Year Prediction -->
+  <!-- 🎁 Lucky Box Section -->
   <section id="lucky-box-section" style="margin: 40px 0; text-align: center;">
     <h2>🎁 Pick a Lucky Box for Your New Year 🎆</h2>
     <p>Choose one box to see what the New Year has in store for you ✨</p>
@@ -64,35 +60,38 @@
       <div class="lucky-box">🎁</div>
       <div class="lucky-box">🎁</div>
     </div>
-
-    <p id="lucky-result" style="margin-top: 20px; font-size: 1.2em; font-weight: bold;"></p>
   </section>
 
-
-  <!-- 🎄 Christmas Popup -->
+  <!-- 🎄 / 🥊 / 🎆 Festive Popup -->
   <div id="christmas-popup" class="popup-overlay">
     <div class="popup-box">
       <button class="close-btn" id="close-popup-btn">✖</button>
-      <h2>🥊 Happy Boxing Day!  🥊</h2>
-      <p>  🥊<br />
-        Wishing you amazing deals, warm moments, and joyful surprises 🥊
-        Enjoy your Boxing Day!
-      </p>
+      <h2>🎄 Festive Message 🎄</h2>
+      <p id="popup-text"></p>
       <button class="popup-action" id="popup-action-btn">🎁 Enjoy the Wishes</button>
     </div>
   </div>
 
-  <!-- Trigger Popup Button -->
-  <button id="open-popup-btn" style="padding:0.5rem 1rem; border:none; background:#28a745; color:white; border-radius:5px; cursor:pointer;">
- Open Boxing Day Message
+  <!-- 🎁 Lucky Box Popup -->
+  <div id="lucky-popup" class="lucky-popup-overlay">
+    <div class="lucky-popup-box">
+      <h2>🎁 Your Lucky Message 🎁</h2>
+      <p id="lucky-popup-message"></p>
+      <button id="close-lucky-popup" class="lucky-popup-close">Close</button>
+    </div>
+  </div>
+
+  <!-- Popup Trigger -->
+  <button id="open-popup-btn" class="trigger-btn">
+    🎉 Open Festive Message
   </button>
 
   <p id="credit">🎨 Created by Chisco (Desmond)</p>
 
-  <!-- Confetti Library -->
+  <!-- 🎊 Confetti Library -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <!-- Your separate JS file -->
+  <!-- ✅ Main JS -->
   <script src="script.js"></script>
 
 </body>
